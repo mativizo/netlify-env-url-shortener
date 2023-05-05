@@ -55,6 +55,24 @@ URL_YOUTUBE="yt|youtube.com"
 URL_GOOGLE="google|google.com"
 URL_GITHUB="gh|github.com/mativizo/netlify-env-url-shortener"
 ```
+##### Multiple slugs for one url (one-line)
+You can also add multiple slugs to the url by passing them before the url with syntax:
+```
+<PREFIX><UNIQUE_NAME>="<SLUG_1><DELIMITER><SLUG_2><DELIMITER>...<DELIMITER><TARGET_URL>"
+```
+
+For example:
+```
+URL_YOUTUBE="yt|youtube|videos|youtube.com"
+```
+
+Will generate:
+- example.com/yt -> https://youtube.com
+- example.com/youtube -> https://youtube.com
+- example.com/videos -> https://youtube.com
+
+
+
 
 ### Configuration
 You can set the configuration by the few env variables.

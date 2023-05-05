@@ -30,6 +30,10 @@ function getUrlsFromEnv(config) {
             const urlArray = urlString.split(config.oneLineDelimiter)
             if (urlArray.length === 2) {
                 urls[urlArray[0]] = urlArray[1]
+            } else if (urlArray.length > 2) {
+                for (let j = 0; j < urlArray.length-1; j++) {
+                    urls[urlArray[j]] = urlArray[urlArray.length-1]
+                }
             }
         } else {
             if (key.endsWith('_GO')) {
