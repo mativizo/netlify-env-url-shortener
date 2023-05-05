@@ -72,6 +72,12 @@ exports.handler = async (event, context) => {
     const config = loadConfig()
     const urls = getUrlsFromEnv(config)
 
+    if (config.debug) {
+        console.log(config)
+        console.log(urls)
+    }
+
+
     if (config.debug && id === 'debug') {
         return {
             statusCode: 200,
