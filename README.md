@@ -4,6 +4,8 @@ Simple URL shortener based on env variables ready for netlify deploy.
 ### Functions
 The repository contains only one function - `./functions/redirect.js`. Project doesn't use database or json file, just env variables.
 
+Loosely based on the [env-url-shortener](https://github.com/mativizo/env-url-shortener).
+
 ### Dependencies
 The repository doesn't have any production dependencies.
 `dotenv` and `netlify-cli` are used only for the dev.
