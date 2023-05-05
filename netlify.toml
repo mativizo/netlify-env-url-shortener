@@ -1,0 +1,7 @@
+[build]
+functions = 'functions'
+
+[[redirects]]
+  from = "/:id"
+  to = "/.netlify/functions/redirect?id=:id"
+  status = 200

@@ -1,0 +1,29 @@
+{
+  "name": "netlify-env-url-shortener",
+  "version": "1.0.0",
+  "description": "A Netlify version of env-url-shortener.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "netlify dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mativizo/netlify-env-url-shortener.git"
+  },
+  "keywords": [
+    "netlify",
+    "url",
+    "url-shortener",
+    "env"
+  ],
+  "author": "Mativizo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mativizo/netlify-env-url-shortener/issues"
+  },
+  "homepage": "https://github.com/mativizo/netlify-env-url-shortener#readme",
+  "devDependencies": {
+    "dotenv": "^16.0.3",
+    "netlify-cli": "^14.4.0"
+  }
+}
