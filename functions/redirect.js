@@ -1,5 +1,5 @@
 // if running from npm run dev
-const isDevEnv = process.env.npm_lifecycle_event === 'dev'
+const isDevEnv = process.env.npm_lifecycle_event === 'dev' || false
 
 if (isDevEnv) {
     const dotenv = require('dotenv')
