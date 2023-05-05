@@ -117,3 +117,11 @@ IS_ONE_LINE_SYNTAX="true"
 ONE_LINE_DELIMITER=" -> "
 URL_YOUTUBE="yt -> youtube.com"
 ```
+
+
+### Debugging
+For simple debugging you can check the generated config and generated urls by using variable:
+```
+DEBUG='true'
+```
+And then going to the address `example.com/debug`.

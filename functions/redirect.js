@@ -11,6 +11,7 @@ function loadConfig() {
         isOneLineSyntax: process.env.IS_ONE_LINE_SYNTAX === 'true' || false,
         prefix: process.env.VAR_PREFIX || 'URL_',
         oneLineDelimiter: process.env.ONE_LINE_DELIMITER || '|',
+        debug: process.env.DEBUG === 'true' || false
     }
 
 }
@@ -58,7 +59,7 @@ function getUrlsFromEnv(config) {
         }
 
     }
-    
+
     return urls
 }
 
@@ -70,6 +71,16 @@ exports.handler = async (event, context) => {
     
     const config = loadConfig()
     const urls = getUrlsFromEnv(config)
+
+    if (config.debug && id === 'debug') {
+        return {
+            statusCode: 200,
+            body: JSON.stringify({config, urls}),
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        }
+    }
 
     let url = urls[id]
     if (typeof url === 'object') {
