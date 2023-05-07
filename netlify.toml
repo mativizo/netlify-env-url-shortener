@@ -1,7 +1,14 @@
-[build]
-functions = 'functions'
+[build.environment]
+  NPM_VERSION = "latest"
 
 [[redirects]]
-  from = "/:id"
-  to = "/.netlify/functions/redirect?id=:id"
-  status = 200
+  from = "/:slug"
+  to = "/.netlify/functions/redirect/:slug"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/"
+  to = "/.netlify/functions/redirect"
+  status = 301
+  force = true

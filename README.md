@@ -82,39 +82,39 @@ You can set the configuration by the few env variables.
 ##### PREFIX
 To set prefix that you're going to use with your variables:
 ```
-VAR_PREFIX="SHORT_"
+FUNCTION_VAR_PREFIX="SHORT_"
 ```
 
 and then use:
 ```
-VAR_PREFIX="SHORT_"
+FUNCTION_VAR_PREFIX="SHORT_"
 SHORT_YOUTUBE_ID="yt"
 SHORT_YOUTUBE_GO="youtube.com"
 ```
 
 ##### ONE LINE MODE
-To enable one-line approach you can use the variable `IS_ONE_LINE_SYNTAX`:
+To enable one-line approach you can use the variable `FUNCTION_IS_ONE_LINE_SYNTAX`:
 ```
-IS_ONE_LINE_SYNTAX='true'
+FUNCTION_IS_ONE_LINE_SYNTAX='true'
 ```
 
 and then write urls like:
 ```
-IS_ONE_LINE_SYNTAX="true"
+FUNCTION_IS_ONE_LINE_SYNTAX="true"
 URL_YOUTUBE="yt|youtube.com"
 ```
 
 ##### ONE LINE DELIMITER
-You can also change delimiter for one-line syntax by using the variable `ONE_LINE_DELIMITER`:
+You can also change delimiter for one-line syntax by using the variable `FUNCTION_ONE_LINE_DELIMITER`:
 
 ```
-ONE_LINE_DELIMITER="->"
+FUNCTION_ONE_LINE_DELIMITER="->"
 ```
 
 and then type urls like:
 ```
-IS_ONE_LINE_SYNTAX="true"
-ONE_LINE_DELIMITER=" -> "
+FUNCTION_IS_ONE_LINE_SYNTAX="true"
+FUNCTION_ONE_LINE_DELIMITER=" -> "
 URL_YOUTUBE="yt -> youtube.com"
 ```
 
@@ -122,6 +122,6 @@ URL_YOUTUBE="yt -> youtube.com"
 ### Debugging
 For simple debugging you can check the generated config and generated urls by using variable:
 ```
-DEBUG='true'
+FUNCTION_DEBUG='true'
 ```
 And then going to the address `example.com/debug`.

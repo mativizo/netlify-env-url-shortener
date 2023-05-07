@@ -8,10 +8,10 @@ if (isDevEnv) {
 
 function loadConfig() {
     return {
-        isOneLineSyntax: process.env.IS_ONE_LINE_SYNTAX === 1 || false,
-        prefix: process.env.VAR_PREFIX || 'URL_',
-        oneLineDelimiter: process.env.ONE_LINE_DELIMITER || '|',
-        debug: process.env.DEBUG === 1 || false
+        isOneLineSyntax: process.env.FUNCTION_IS_ONE_LINE_SYNTAX == 1,
+        prefix: process.env.FUNCTION_VAR_PREFIX || 'URL_',
+        oneLineDelimiter: process.env.FUNCTION_ONE_LINE_DELIMITER || '|',
+        debug: process.env.FUNCTION_DEBUG == 1
     }
 
 }
@@ -22,6 +22,7 @@ function getUrlsFromEnv(config) {
 
     // create empty object
     const urls = {}
+    const temp = {}
 
     // loop through keys
     for (let i = 0; i < envKeys.length; i++) {
@@ -40,21 +41,27 @@ function getUrlsFromEnv(config) {
             if (key.endsWith('_GO')) {
                 const id = key.replace('_GO', '').replace(config.prefix, '')
                 if (id) {
-                    if (!urls[id]) urls[id] = {}
+                    if (!temp[id]) temp[id] = {}
                     if (id) {
                         const go = process.env[key]
-                        urls[id] = {...urls[id], go}
+                        temp[id] = {...temp[id], go}
                     }
                 }
             } else if (key.endsWith('_ID')) {
                 const id = key.replace('_ID', '').replace(config.prefix, '')
                 if (id) {
-                    if (!urls[id]) urls[id] = {}
+                    if (!temp[id]) urls[id] = {}
                     if (id) {
                         const slug = process.env[key]
-                        urls[id] = {...urls[id], id: slug}
+                        temp[id] = {...temp[id], slug: slug}
                     }
                 }
+            }
+
+            const tempKeys = Object.keys(temp)
+            for (let j = 0; j < tempKeys.length; j++) {
+                const tempKey = tempKeys[j]
+                urls[temp[tempKey].slug] = temp[tempKey].go
             }
         }
 
@@ -67,10 +74,12 @@ function getUrlsFromEnv(config) {
 exports.handler = async (event, context) => {
     
     // Get the last segment of the URL
-    const id = event.path.split('/').pop()
+    const slug = event.path.split('/').pop()
     
     const config = loadConfig()
     const urls = getUrlsFromEnv(config)
+
+    console.log(slug, config, urls)
 
     if (config.debug) {
         console.log(config)
@@ -78,36 +87,21 @@ exports.handler = async (event, context) => {
     }
 
 
-    if (config.debug && id === 'debug') {
+    if (config.debug && slug === 'debug') {
         return {
             statusCode: 200,
-            body: JSON.stringify({config, urls}),
+            body: JSON.stringify({config, urls, message: "You can disable this route by setting env variable FUNCTION_DEBUG=0."}),
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
             }
         }
     }
 
-    let url = urls[id]
-    if (typeof url === 'object') {
-        url = url.go
-    } else {
-        const urlsKeys = Object.keys(urls)
-        for (let i = 0; i < urlsKeys.length; i++) {
-            if (typeof urls[urlsKeys[i]] === 'object') {
-                if (id === urls[urlsKeys[i]].id) {
-                    url = urls[urlsKeys[i]].go
-                    break
-                }
-            }
-        }
-    }
-
+    let url = urls[slug]
     if (url) {
         if (!url.startsWith("http://") && !url.startsWith("https://")) {
             url = `https://${url}`
         }
-
         return {
             statusCode: 302,
             headers: {
