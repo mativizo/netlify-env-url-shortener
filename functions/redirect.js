@@ -8,10 +8,10 @@ if (isDevEnv) {
 
 function loadConfig() {
     return {
-        isOneLineSyntax: process.env.IS_ONE_LINE_SYNTAX === 'true' || false,
+        isOneLineSyntax: process.env.IS_ONE_LINE_SYNTAX === 1 || false,
         prefix: process.env.VAR_PREFIX || 'URL_',
         oneLineDelimiter: process.env.ONE_LINE_DELIMITER || '|',
-        debug: process.env.DEBUG === 'true' || false
+        debug: process.env.DEBUG === 1 || false
     }
 
 }
